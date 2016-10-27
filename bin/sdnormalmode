@@ -1,0 +1,28 @@
+#!/bin/bash
+
+sudo /usr/sbin/sshd
+cmd="sdrunemacs $@"
+xorg_cmd="Xorg\
+	-dpi $XORG_DPI\
+	-noreset\
+	-nolisten tcp\
+	+extension GLX\
+	+extension RANDR\
+	+extension RENDER\
+	-logfile /tmp/Xorg.log\
+	-config /etc/xpra/xorg.conf"
+mkdir -p /tmp/spacemacs-mmap
+export TMPDIR=/tmp/spacemacs-mmap
+xpra start $XPRA_DISPLAY\
+     --xvfb="${xorg_cmd}"\
+     --sharing="${XPRA_SHARING}"\
+     --pulseaudio=no\
+     --speaker=disabled\
+     --no-daemon\
+     --dpi="${XPRA_DPI}"\
+     --compress="${XPRA_COMPRESS}"\
+     --keyboard-sync="${XPRA_KEYBOARD_SYNC}"\
+     --mdns=no\
+     --mmap="${XPRA_MMAP}"\
+     --encoding="${XPRA_ENCODING}"\
+     --start-child="${cmd}"

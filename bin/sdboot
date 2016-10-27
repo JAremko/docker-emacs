@@ -1,0 +1,54 @@
+#!/bin/bash
+
+sudo mkdir -p "${UHOME}/.ssh" /var/run/sshd
+sudo find /etc/pub-keys -type f -name *.pub\
+       -exec cat "{}" >> "${UHOME}"/.ssh/authorized_keys \;
+sudo chmod 600 -R "${UHOME}/.ssh/"
+sudo chmod 700 "${UHOME}/.ssh/"
+sudo chmod 0755 /var/run/sshd
+sudo echo "PasswordAuthentication no" >> "/etc/ssh/sshd_config"
+sudo sed -i "s/^Port .*$/Port ${SSHD_PORT}/" "/etc/ssh/sshd_config"
+sudo chown -R ${UID}:${GID} "${UHOME}/.ssh"
+
+eval $(cat /etc/environment | sed 's/^/export /')
+
+case "$SDMODE" in
+    'debug')
+        echo "Starting in the debug mode..."
+        bash sddebug
+        ;;
+    'webbrowser_insecure')
+        echo   "Starting in the =INSECURE= web browser mode."
+        printf '=%.0s' {1..70}
+        echo   ""
+        echo   "WARNING!!!!!"
+        echo   "This mode doesn't use encryption or TLS."
+        echo   "Please use it behind Docker's or external firewall."
+        echo   "If you want to use it a beyond local network:"
+        printf "  - Make sure that the running container "
+        printf "doesn't have privileges and doesn't mount sensitive data.\n"
+        printf "  - Use https (tls) proxy in-front of the server to secure the channel."
+        echo   "  You can use docker based proxy like:"
+        echo   "https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion"
+        printf '=%.0s' {1..70}
+        echo   ""
+        printf "The environment variable XPRA_PASSWORD should be set "
+        printf "to the server's password.\n"
+        echo   "use http://IP:PORT/index.html?password=<XPRA_PASSWORD> to connect."
+        echo   "Server's port is set by XPRA_HTML_PORT environment variable."
+        echo   "To set encoding, full-screen mode etc. Use http://IP:PORT/connect.html"
+        bash sdhtml
+        ;;
+    'normal')
+        echo "Starting in the standard mode..."
+        bash sdnormalmode
+        ;;
+    'ssh')
+        echo "Starting in the ssh/mosh mode..."
+        bash sdssh
+        ;;
+    *)
+        echo "SDMODE variable specifies unknown run-mode!\nExiting..."
+        exit 1
+        ;;
+esac
