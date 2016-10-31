@@ -13,5 +13,3 @@ xpra attach --encoding=rgb --ssh="ssh -p 22" ssh:root@localhost:14
 ``` 
 
 *Also you can connect via Docker terminal, mosh, ssh or GUI browser.*
-
-**WIP**
