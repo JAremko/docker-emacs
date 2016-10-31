@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER JAremko <w3techplaygound@gmail.com>
 
 ENV XPRA_URL="https://www.xpra.org/dists/xenial/\
-main/binary-amd64/xpra_0.17.5-r13455-2_amd64.deb"        \
+main/binary-amd64/xpra_0.17.6-r14318-1_amd64.deb"        \
     SCP_URL="https://github.com/adobe-fonts/\
 source-code-pro/archive/2.030R-ro/1.050R-it.tar.gz"      \
     NNG_URL="http://www.ffonts.net/NanumGothic.font.zip" \
