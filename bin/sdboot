@@ -1,14 +1,10 @@
 #!/bin/bash
 
-sudo mkdir -p "${UHOME}/.ssh" /var/run/sshd
-sudo find /etc/pub-keys -type f -name *.pub\
-       -exec cat "{}" >> "${UHOME}"/.ssh/authorized_keys \;
+mkdir -p "${UHOME}/.ssh"
+find /etc/pub-keys -type f -name *.pub -exec cat "{}" >> "${UHOME}"/.ssh/authorized_keys \;
 sudo chmod 600 -R "${UHOME}/.ssh/"
 sudo chmod 700 "${UHOME}/.ssh/"
-sudo chmod 0755 /var/run/sshd
-sudo echo "PasswordAuthentication no" >> "/etc/ssh/sshd_config"
 sudo sed -i "s/^Port .*$/Port ${SSHD_PORT}/" "/etc/ssh/sshd_config"
-sudo chown -R ${UID}:${GID} "${UHOME}/.ssh"
 
 eval $(cat /etc/environment | sed 's/^/export /')
 

@@ -16,6 +16,10 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf  && \
       git gzip language-pack-en-base make mosh openssh-server    \
       sudo software-properties-common tar unzip wget          && \
     dpkg-reconfigure locales                                  && \
+# ssh
+    mkdir -p /var/run/sshd                                     && \
+    chmod 0755 /var/run/sshd                                   && \
+    echo "PasswordAuthentication no" >> "/etc/ssh/sshd_config" && \
 # xpra
     apt-get install libssl-dev python-dbus python-dev         \
       python-gst-1.0 python-pip python-pkg-resources          \
