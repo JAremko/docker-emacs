@@ -1,10 +1,13 @@
 #!/bin/bash
 
+sudo mkdir -p /tmp/.X11-unix
+sudo chmod 1777 /tmp/.X11-unix
+sudo sed -i "s/^Port .*$/Port ${SSHD_PORT}/" "/etc/ssh/sshd_config"
 mkdir -p "${UHOME}/.ssh"
+sudo chown ${UID}:${GID} -R /etc/pub-keys
 find /etc/pub-keys -type f -name *.pub -exec cat "{}" >> "${UHOME}"/.ssh/authorized_keys \;
 sudo chmod 600 -R "${UHOME}/.ssh/"
 sudo chmod 700 "${UHOME}/.ssh/"
-sudo sed -i "s/^Port .*$/Port ${SSHD_PORT}/" "/etc/ssh/sshd_config"
 
 eval $(cat /etc/environment | sed 's/^/export /')
 
