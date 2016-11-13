@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-emacs -batch -u "${UNAME}" -kill -f "spacemacs-docker//test-dotfile"
-cd "${UHOME}/.emacs.d/tests/core" && make test

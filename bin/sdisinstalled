@@ -1,8 +1,0 @@
-#!/bin/bash
-
-for P; do
-    dpkg -s "$P" >/dev/null 2>&1 && {
-        printf "$P "
-    }
-done
-printf "\n"

@@ -1,8 +1,0 @@
-#!/bin/bash
-
-spacemacs_args=$@
-# reset TMPDIR after shenanigans.
-export TMPDIR=/tmp
-#  just in case :)
-. /etc/environment
-emacs $spacemacs_args
