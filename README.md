@@ -7,9 +7,9 @@
 [![http://i.imgur.com/RB46TA9.jpg](http://i.imgur.com/PCpbVg0.jpg)](http://i.imgur.com/RB46TA9.jpg)
 
 ### Why?
-  - Reap the benefit of Emacs and other GNU/Linux tools on Windows/MacOS machine
+  - Reap the benefit of Emacs and other GNU/Linux tools on Windows/MacOS machines
   - Use https://hub.docker.com/ to auto-build your environment and store backups
-  - Work with the same development environment everywhere
+  - Build once and work with the same development environment everywhere
   - Run untrusted/risky code in the tunable sandbox with CPU/network/disk quotas if needed
   - Try new tools, perform destructive experiment and roll back changes when something goes wrong
   - Share your setup with others or extend someone else's builds
@@ -129,4 +129,10 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
   - `docker run -ti ... jare/emacs /bin/bash` - start bash
   - `docker exec emacs /usr/bin/emacs` - start `/usr/bin/emacs` in the running `emacs` container
   - `docker logs emacs` - print `emacs` container's logs
-  - Read [Docker run reference](https://docs.docker.com/engine/reference/run/)
+  - `docker run ... -p 8080:8080 ... jare/emacs` - access container's server from localhost:8080
+  - `docker cp <from_my_local_machine_path> emacs:/<to_my_emacs_container_path>`
+  - `docker cp emacs:/<from_my_emacs_container_path> <to_my_local_machine_path>`
+  -  Manage data in containers with [Docker volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Example:
+    -  `docker volume create --name my-workspace`
+    -  `docker run ... -v my-workspace:/mnt/workspace ... jare/emacs`
+    -  `docker run ... -v my-workspace:/home/developer/workspace ... jare/vim-bundle`
