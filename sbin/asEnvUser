@@ -1,5 +1,5 @@
 #!/bin/bash
-bash /usr/local/bin/newUserFromEnv
+bash /usr/local/sbin/newUserFromEnv
 mkdir -p "${WORKSPACE}"
 chown "${UID}":"${GID}" "${WORKSPACE}"
 cd "${WORKSPACE}"
