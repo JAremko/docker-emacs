@@ -17,7 +17,7 @@
   - [Pause](https://docs.docker.com/engine/reference/commandline/pause) container to free resources temporarily
   - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - potentially fastest way to start a "heavy" development environment
 
-### How to run
+### How to use
 
 First install [docker](https://docs.docker.com/engine/installation/)
 
