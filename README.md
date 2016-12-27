@@ -17,6 +17,10 @@
   - [Pause](https://docs.docker.com/engine/reference/commandline/pause) container to free resources temporarily
   - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - potentially fastest way to start a "heavy" development environment
 
+### Tags:
+  `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs25/Dockerfile)
+  `testing` [dockerfiles/emacs-snapshot](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs-snapshot/Dockerfile)
+
 ### How to use
 
 First install [docker](https://docs.docker.com/engine/installation/)
