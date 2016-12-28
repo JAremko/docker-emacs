@@ -1,6 +1,0 @@
-#!/bin/bash
-bash /usr/local/sbin/newUserFromEnv
-mkdir -p "${WORKSPACE}"
-chown "${UID}":"${GID}" "${WORKSPACE}"
-cd "${WORKSPACE}"
-su-exec "${UNAME}" "$@"

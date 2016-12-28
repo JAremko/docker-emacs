@@ -39,8 +39,8 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
       emacs-snapshot \
       libgl1-mesa-glx \
 # Only for sudoers
-    && chown root /usr/local/sbin/asEnvUser /usr/local/sbin/newUserFromEnv \
-    && chmod 700  /usr/local/sbin/asEnvUser /usr/local/sbin/newUserFromEnv \
+    && chown root /usr/local/sbin/asEnvUser \
+    && chmod 700  /usr/local/sbin/asEnvUser \
 # Cleanup
     && apt-get purge \
       software-properties-common \
