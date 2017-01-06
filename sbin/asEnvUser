@@ -15,14 +15,15 @@ if [ $? -ne 0 ]; then
   echo "${GNAME}:x:${GID}:${UNAME}" >> /etc/group
 fi
 
-if [ -d "${UHOME}" ]; then
-    home_owner="$(stat --format '%U' ${UHOME})"
-    if [ $(id -u ${UNAME}) -ne $(id -u ${home_owner}) ]; then
-      chown "${UID}":"${GID}" -R ${UHOME}
-    fi
-  else
-    mkdir -p "${UHOME}"
-    chown "${UID}":"${GID}" "${UHOME}"
+if [ -d "${UHOME}" ]
+then
+  home_owner="$(stat --format '%U' ${UHOME})"
+  if [ $(id -u ${UNAME}) -ne $(id -u ${home_owner}) ]; then
+    chown "${UID}":"${GID}" -R ${UHOME}
+  fi
+else
+  mkdir -p "${UHOME}"
+  chown "${UID}":"${GID}" "${UHOME}"
 fi
 
 mkdir -p "${WORKSPACE}"
