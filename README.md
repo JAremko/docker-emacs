@@ -1,4 +1,4 @@
-### Emacs Docker with GUI support(MacOS, Windows, GNU/Linux and your web browser)
+### Dockerized Emacs with GUI(MacOS, Windows, GNU/Linux and your web browser)
 
 #### (Clickable!)
 
