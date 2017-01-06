@@ -1,10 +1,14 @@
-### Emacs Docker with GUI support
+### Emacs Docker with GUI support(MacOS, Windows, GNU/Linux and your web browser)
 
-(Clickable!)
+#### (Clickable!)
 
 [![http://i.imgur.com/rONW3c3.jpg](http://i.imgur.com/B1gvpmK.jpg)](http://i.imgur.com/rONW3c3.jpg)
 [![http://i.imgur.com/mjl9ALQ.jpg](http://i.imgur.com/j6TO942.jpg)](http://i.imgur.com/mjl9ALQ.jpg)
 [![http://i.imgur.com/RB46TA9.jpg](http://i.imgur.com/PCpbVg0.jpg)](http://i.imgur.com/RB46TA9.jpg)
+
+[docker-x11-bridge](https://github.com/JAremko/docker-x11-bridge) + a web browser
+[![https://github.com/JAremko/docker-x11-bridge/raw/master/img/demoHD.jpg](https://github.com/JAremko/docker-x11-bridge/raw/master/img/demo.jpg)](https://github.com/JAremko/docker-x11-bridge/raw/master/img/demoHD.jpg)
+
 
 ### Why?
   - Reap the benefit of Emacs and other GNU/Linux tools on Windows/MacOS machines
@@ -112,9 +116,9 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
 ```
 *[source](http://stackoverflow.com/questions/25281992/alternatives-to-ssh-x11-forwarding-for-docker-containers)*
 
-#### Also you can run it with  [docker-x11-bridge](https://github.com/JAremko/docker-x11-bridge)
+#### Also you can run it with [docker-x11-bridge](https://github.com/JAremko/docker-x11-bridge)
 ##### Pros:
-  - Same client for GNU/Linux, Windows and MacOS + web-browser
+  - Same client for GNU/Linux, Windows and MacOS + web browser
   - Persistent server (you can connect and disconnect without disrupting Emacs)
   - Interactive screen sharing [demo](https://imgur.com/ijdSuX6)
   - Read/write rss/email with Emacs in web-browser (O_O) [demo](https://imgur.com/wDLDMZN)
