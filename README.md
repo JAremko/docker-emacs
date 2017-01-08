@@ -18,12 +18,14 @@
   - Try new tools, perform destructive experiment and roll back changes when something goes wrong
   - Share your setup with others or extend someone else's builds
   - Run multiple Emacs instances on the same machine isolated
+  - An easy way to swap Emacs version (`emacs25`,`emacs24`,`emacs-snapshot`) for debugging
   - [Pause](https://docs.docker.com/engine/reference/commandline/pause) container to free resources temporarily
   - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - potentially fastest way to start a "heavy" development environment
 
 ### Tags:
-  `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs25/Dockerfile)
-  `testing` [dockerfiles/emacs-snapshot](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs-snapshot/Dockerfile)
+ - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs25/Dockerfile)
+ - `testing` [dockerfiles/emacs-snapshot](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs-snapshot/Dockerfile)
+ - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs24/Dockerfile)
 
 ### How to use
 
