@@ -128,7 +128,10 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
 ##### Cons:
   - Lag spikes with some OSes
 
-#### Basic Docker commands:
+#### Use as a base image:
+  Alternatively you can use one of the Emacs images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/)
+
+#### Some generally useful Docker commands:
   - `docker rm -f emacs` - remove `emacs` container
   - `docker restart emacs` - restart `emacs` container
   - `docker rmi -f jare/emacs` - remove `jare/emacs` image
