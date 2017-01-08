@@ -7,8 +7,6 @@ ENV NO_AT_BRIDGE=1
 
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY sbin/* /usr/local/sbin/
-
 # basic stuff
 RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && apt-get update && apt-get install \
@@ -21,10 +19,10 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
       git \
       gzip \
       language-pack-en-base \
+      libgl1-mesa-glx \
       make \
       mosh \
       sudo \
-      software-properties-common \
       tar \
       unzip \
       wget \
@@ -33,18 +31,22 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && cd /tmp/su-exec \
     && make \
     && mv ./su-exec /usr/local/sbin/ \
-# Emacs
-    && apt-add-repository ppa:ubuntu-elisp/ppa \
-    && apt-get update && apt-get install \
-      emacs-snapshot \
-      libgl1-mesa-glx \
-# Only for sudoers
-    && chown root /usr/local/sbin/asEnvUser \
-    && chmod 700  /usr/local/sbin/asEnvUser \
 # Cleanup
-    && apt-get purge \
-      software-properties-common \
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
+
+# Emacs
+RUN apt-get update && apt-get install software-properties-common \
+    && apt-add-repository ppa:ubuntu-elisp/ppa \
+    && apt-get update && apt-get install emacs-snapshot \
+# Cleanup
+    && apt-get purge software-properties-common \
+    && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
+
+COPY sbin/* /usr/local/sbin/
+
+# Only for sudoers
+RUN chown root /usr/local/sbin/asEnvUser \
+    && chmod 700  /usr/local/sbin/asEnvUser
 
 ENV UNAME="emacser" \
     GNAME="emacs" \
