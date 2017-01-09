@@ -34,16 +34,18 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
 # Cleanup
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
-# Emacs
-RUN apt-get update && apt-get install emacs24 \
-# Cleanup
-    && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
-
 COPY sbin/* /usr/local/sbin/
 
 # Only for sudoers
 RUN chown root /usr/local/sbin/asEnvUser \
     && chmod 700  /usr/local/sbin/asEnvUser
+
+# ^^^^^^^ Those layers are shared ^^^^^^^
+
+# Emacs
+RUN apt-get update && apt-get install emacs24 \
+# Cleanup
+    && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
 ENV UNAME="emacser" \
     GNAME="emacs" \

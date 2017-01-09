@@ -34,6 +34,14 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
 # Cleanup
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
+COPY sbin/* /usr/local/sbin/
+
+# Only for sudoers
+RUN chown root /usr/local/sbin/asEnvUser \
+    && chmod 700  /usr/local/sbin/asEnvUser
+
+# ^^^^^^^ Those layers are shared ^^^^^^^
+
 # Emacs
 RUN apt-get update && apt-get install software-properties-common \
     && apt-add-repository ppa:ubuntu-elisp/ppa \
@@ -41,12 +49,6 @@ RUN apt-get update && apt-get install software-properties-common \
 # Cleanup
     && apt-get purge software-properties-common \
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
-
-COPY sbin/* /usr/local/sbin/
-
-# Only for sudoers
-RUN chown root /usr/local/sbin/asEnvUser \
-    && chmod 700  /usr/local/sbin/asEnvUser
 
 ENV UNAME="emacser" \
     GNAME="emacs" \
