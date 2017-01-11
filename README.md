@@ -130,7 +130,7 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
   - Lag spikes with some OSes
 
 #### Use as a base image:
-  Alternatively you can use one of the Emacs images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/)
+  Alternatively you can use one of the Emacs images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/). [Example](https://github.com/JAremko/docker-emacs-example)
 
 #### Some generally useful Docker commands:
   - `docker rm -f emacs` - remove `emacs` container
