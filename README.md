@@ -26,6 +26,7 @@
  - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs25/Dockerfile)
  - `testing` [dockerfiles/emacs-snapshot](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs-snapshot/Dockerfile)
  - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs24/Dockerfile)
+ - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/alpine/Dockerfile) *small (300mb+) [uses musl-libc](https://www.musl-libc.org/) but can be glitchy*
 
 ### How to use
 
