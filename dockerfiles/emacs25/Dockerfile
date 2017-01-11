@@ -10,21 +10,21 @@ ENV DEBIAN_FRONTEND noninteractive
 # basic stuff
 RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && apt-get update && apt-get install \
-      apt-utils \
-      bash \
-      build-essential \
-      curl \
-      dbus-x11 \
-      fontconfig \
-      git \
-      gzip \
-      language-pack-en-base \
-      libgl1-mesa-glx \
-      make \
-      sudo \
-      tar \
-      unzip \
-      wget \
+    apt-utils \
+    bash \
+    build-essential \
+    curl \
+    dbus-x11 \
+    fontconfig \
+    git \
+    gzip \
+    language-pack-en-base \
+    libgl1-mesa-glx \
+    make \
+    sudo \
+    tar \
+    unzip \
+    wget \
 # su-exec
     && git clone https://github.com/ncopa/su-exec.git /tmp/su-exec \
     && cd /tmp/su-exec \
