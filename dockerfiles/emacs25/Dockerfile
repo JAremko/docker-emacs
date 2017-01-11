@@ -21,7 +21,6 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
       language-pack-en-base \
       libgl1-mesa-glx \
       make \
-      mosh \
       sudo \
       tar \
       unzip \
