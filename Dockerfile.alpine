@@ -5,7 +5,7 @@ MAINTAINER JAremko <w3techplaygound@gmail.com>
 # Fix "Couldn't register with accessibility bus" error message
 ENV NO_AT_BRIDGE=1
 
-COPY sbin/* /usr/local/sbin/
+COPY asEnvUser /usr/local/sbin/
 
 RUN echo "http://nl.alpinelinux.org/alpine/edge/main" \
     >> /etc/apk/repositories \

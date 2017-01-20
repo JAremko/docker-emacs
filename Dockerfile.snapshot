@@ -33,7 +33,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
 # Cleanup
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
-COPY sbin/* /usr/local/sbin/
+COPY asEnvUser /usr/local/sbin/
 
 # Only for sudoers
 RUN chown root /usr/local/sbin/asEnvUser \

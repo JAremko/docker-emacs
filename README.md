@@ -23,14 +23,14 @@
   - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - potentially fastest way to start a "heavy" development environment
 
 ### Tags:
- - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs25/Dockerfile)
- - `testing` [dockerfiles/emacs-snapshot](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs-snapshot/Dockerfile)
- - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/emacs24/Dockerfile)
- - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/dockerfiles/alpine/Dockerfile) *small (300mb+) [uses musl-libc](https://www.musl-libc.org/) but can be glitchy*
+ - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs25)
+ - `testing` [dockerfiles/snapshot](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.snapshot)
+ - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs24)
+ - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb) but can be glitchy*
 
 ### How to use
 
-First install [docker](https://docs.docker.com/engine/installation/)
+Install [docker](https://docs.docker.com/engine/installation/) for your OS. then:
 
 #### MacOS:
 Get [`XQuartz`](https://www.xquartz.org)
@@ -132,7 +132,7 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
 #### Use as a base image:
   Alternatively you can use one of the Emacs images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/). [Example](https://github.com/JAremko/docker-emacs-example)
 
-#### Some generally useful Docker commands:
+#### Some basic docker commands to get you going:
   - `docker rm -f emacs` - remove `emacs` container
   - `docker restart emacs` - restart `emacs` container
   - `docker rmi -f jare/emacs` - remove `jare/emacs` image

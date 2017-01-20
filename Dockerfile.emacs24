@@ -33,7 +33,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
 # Cleanup
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
-COPY sbin/* /usr/local/sbin/
+COPY asEnvUser /usr/local/sbin/
 
 # Only for sudoers
 RUN chown root /usr/local/sbin/asEnvUser \
@@ -42,11 +42,8 @@ RUN chown root /usr/local/sbin/asEnvUser \
 # ^^^^^^^ Those layers are shared ^^^^^^^
 
 # Emacs
-RUN apt-get update && apt-get install software-properties-common \
-    && apt-add-repository ppa:adrozdoff/emacs \
-    && apt-get update && apt-get install emacs25 \
+RUN apt-get update && apt-get install emacs24 \
 # Cleanup
-    && apt-get purge software-properties-common \
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
 ENV UNAME="emacser" \
