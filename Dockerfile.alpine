@@ -16,7 +16,6 @@ RUN echo "http://nl.alpinelinux.org/alpine/edge/main" \
 # basic stuff
     && apk --update add bash \
     build-base \
-    curl \
     dbus-x11 \
     fontconfig \
     git \
@@ -25,7 +24,6 @@ RUN echo "http://nl.alpinelinux.org/alpine/edge/main" \
     sudo \
     tar \
     unzip \
-    wget \
 # su-exec
     && git clone https://github.com/ncopa/su-exec.git /tmp/su-exec \
     && cd /tmp/su-exec \
@@ -37,6 +35,7 @@ RUN echo "http://nl.alpinelinux.org/alpine/edge/main" \
 # Emacs
     && apk --update add emacs-x11 \
 # Cleanup
+    && apk del build-base \
     && rm -rf /var/cache/* /tmp/* /var/log/* ~/.cache \
     && mkdir -p /var/cache/apk
 
