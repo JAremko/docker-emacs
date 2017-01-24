@@ -1,6 +1,6 @@
-### Dockerized Emacs with GUI(MacOS, Windows, GNU/Linux and your web browser)
+#### Dockerized Emacs with GUI(MacOS, Windows, GNU/Linux and your web browser)
 
-#### (Clickable!)
+##### *Images are clickable*
 
 [![http://i.imgur.com/rONW3c3.jpg](http://i.imgur.com/B1gvpmK.jpg)](http://i.imgur.com/rONW3c3.jpg)
 [![http://i.imgur.com/mjl9ALQ.jpg](http://i.imgur.com/j6TO942.jpg)](http://i.imgur.com/mjl9ALQ.jpg)
@@ -10,7 +10,7 @@
 [![https://github.com/JAremko/docker-x11-bridge/raw/master/img/demoHD.jpg](https://github.com/JAremko/docker-x11-bridge/raw/master/img/demo.jpg)](https://github.com/JAremko/docker-x11-bridge/raw/master/img/demoHD.jpg)
 
 
-### Why?
+#### Why?
   - Reap the benefit of Emacs and other GNU/Linux tools on Windows/MacOS machines
   - Use https://hub.docker.com/ to auto-build your environment and store backups
   - Build once and work with the same development environment everywhere
@@ -22,17 +22,17 @@
   - [Pause](https://docs.docker.com/engine/reference/commandline/pause) container to free resources temporarily
   - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - potentially fastest way to start a "heavy" development environment
 
-### Tags:
+#### Tags:
  - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs25)
  - `testing` [dockerfiles/snapshot](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.snapshot)
  - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs24)
- - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb) but can be glitchy*
+ - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) - *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb) but can be glitchy*
 
-### How to use
+#### How to use
 
 Install [docker](https://docs.docker.com/engine/installation/) for your OS. then:
 
-#### MacOS:
+##### MacOS:
 Get [`XQuartz`](https://www.xquartz.org)
 
 ```
@@ -56,7 +56,7 @@ docker run -ti --name emacs\
 
 *[other method](https://github.com/chanezon/docker-tips/blob/master/x11/README.md)*
 
-#### Windows
+##### Windows
 Get [Cygwin](https://www.cygwin.com/) with `xinit`, `xorg-server` and optionaly [`winpty`](https://github.com/rprichard/winpty)(to run Emacs container with `-t`)
 ```
 export DISPLAY=<your-machine-ip>:0.0
@@ -90,7 +90,7 @@ winpty docker run -ti --name emacs\
 *[source](http://manomarks.github.io/2015/12/03/docker-gui-windows.html)*
 *You can use [@ninrod 's vagrant setup](https://github.com/JAremko/docker-emacs/issues/2#issuecomment-260047233)*
 
-#### GNU/Linux
+##### GNU/Linux
 *`UID` and preferably `UNAME` should match the host's user id.
 Also make sure that `$DISPLAY` variable is set*
 ```
@@ -106,7 +106,7 @@ docker run -ti --name emacs -v /tmp/.X11-unix:/tmp/.X11-unix:ro\
 ```
 That's it! Now you should see Emacs window.
 
-##### If it doesn't work
+###### If it doesn't work
 
 You may need to allow local connection for the user
 `UNAME` should match the hosts user id.
@@ -119,20 +119,20 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
 ```
 *[source](http://stackoverflow.com/questions/25281992/alternatives-to-ssh-x11-forwarding-for-docker-containers)*
 
-#### Also you can run it with [docker-x11-bridge](https://github.com/JAremko/docker-x11-bridge)
-##### Pros:
+##### Also you can run it with [docker-x11-bridge](https://github.com/JAremko/docker-x11-bridge)
+###### Pros:
   - Same client for GNU/Linux, Windows and MacOS + web browser
   - Persistent server (you can connect and disconnect without disrupting Emacs)
   - Interactive screen sharing [demo](https://imgur.com/ijdSuX6)
   - Read/write rss/email with Emacs in web-browser (O_O) [demo](https://imgur.com/wDLDMZN)
 
-##### Cons:
+###### Cons:
   - Lag spikes with some OSes
 
-#### Use as a base image:
+##### Use as a base image:
   Alternatively you can use one of the Emacs images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/). [Example](https://github.com/JAremko/docker-emacs-example)
 
-#### Some basic docker commands to get you going:
+##### Some basic docker commands to get you going:
   - `docker rm -f emacs` - remove `emacs` container
   - `docker restart emacs` - restart `emacs` container
   - `docker rmi -f jare/emacs` - remove `jare/emacs` image
