@@ -1,4 +1,4 @@
-#### Dockerized Emacs with GUI(MacOS, Windows, GNU/Linux and your web browser)
+#### Dockerized Emacs with GUI(Mac, Windows, GNU/Linux and your browser)
 
 ##### *Images are clickable*
 
