@@ -16,8 +16,10 @@ if ! id "${UNAME}" >/dev/null 2>&1; then
   echo "${UNAME}::17032:0:99999:7:::" >> /etc/shadow
 fi
 
-echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/${UNAME}"
-chmod 0440 "/etc/sudoers.d/${UNAME}"
+if [ ! -f "/etc/sudoers.d/${UNAME}" ]; then
+  echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/${UNAME}"
+  chmod 0440 "/etc/sudoers.d/${UNAME}"
+fi
 
 egrep -i "^${GNAME}" /etc/group;
 if [ $? -ne 0 ]; then
