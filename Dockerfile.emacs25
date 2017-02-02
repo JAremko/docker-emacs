@@ -26,6 +26,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && git clone https://github.com/ncopa/su-exec.git /tmp/su-exec \
     && cd /tmp/su-exec \
     && make \
+    && chmod 770 su-exec \
     && mv ./su-exec /usr/local/sbin/ \
 # Cleanup
     && apt-get remove build-essential \
