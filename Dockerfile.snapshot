@@ -29,7 +29,8 @@ RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
     && chmod 770 su-exec \
     && mv ./su-exec /usr/local/sbin/ \
 # Cleanup
-    && apt-get remove build-essential \
+    && apt-get purge build-essential \
+    && apt-get autoremove \
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
 COPY asEnvUser /usr/local/sbin/
