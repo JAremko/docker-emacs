@@ -12,15 +12,16 @@
 
 #### Why?
   - Reap the benefit of Emacs and other GNU/Linux tools on Windows/MacOS machines
-  - Use https://hub.docker.com/ to auto-build your environment and store backups
+  - Use [docker hub](https://hub.docker.com/) to auto-build your environment and store full backups for free
   - Build once and work with the same development environment everywhere
-  - Run untrusted/risky code in the tunable sandbox with CPU/network/disk quotas if needed
-  - Try new tools, perform destructive experiment and roll back changes when something goes wrong
-  - Share your setup with others or extend someone else's builds
+  - Run untrusted/risky code in the tunable sandbox with CPU/network/disk quotas
+  - Try new tools, experiment and roll back changes when something goes wrong
+  - Share your setup with others or extend someone else’s development environment
   - Run multiple Emacs instances on the same machine isolated
   - An easy way to swap Emacs version (`emacs25`,`emacs24`,`emacs-snapshot`) for debugging
   - [Pause](https://docs.docker.com/engine/reference/commandline/pause) container to free resources temporarily
-  - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - potentially fastest way to start a "heavy" development environment
+  - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - maybe the fastest way to start a “heavy” environment
+  - Friendly for networks with low upload speed/quotas
 
 #### Tags:
  - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs25)
@@ -29,8 +30,12 @@
  - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) - *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb) but can be glitchy*
 
 #### How to use
-
-Install [docker](https://docs.docker.com/engine/installation/) for your OS. then:
+First get [docker](https://docs.docker.com/engine/installation/) for your OS.
+Then you can use one of the images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/).
+[Simple example](https://github.com/JAremko/docker-emacs-example), [Spacemacs distribution](https://github.com/syl20bnr/spacemacs/tree/develop/layers/%2Bdistributions/spacemacs-docker).
+It will allow you to install and backup additional software/package dependencies. With [Dockerfile ADD](https://docs.docker.com/engine/reference/builder/#add) instruction
+you can extract your `.emacs.d` from archives and remote repositories like GitHub using URL.
+Also you can simply run one of the images:
 
 ##### MacOS:
 Get [`XQuartz`](https://www.xquartz.org)
@@ -124,15 +129,12 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
   - Same client for GNU/Linux, Windows and MacOS + web browser
   - Persistent server (you can connect and disconnect without disrupting Emacs)
   - Interactive screen sharing [demo](https://imgur.com/ijdSuX6)
-  - Read/write rss/email with Emacs in web-browser (O_O) [demo](https://imgur.com/wDLDMZN)
+  - Use Emacs in web-browser (O_O) [demo](https://imgur.com/wDLDMZN)
 
 ###### Cons:
   - Lag spikes with some OSes
 
-##### Use as a base image:
-  Alternatively you can use one of the Emacs images as a base([FROM](https://docs.docker.com/engine/reference/builder/#/from)) for your [Dockerfile](https://docs.docker.com/engine/reference/builder/). [Example](https://github.com/JAremko/docker-emacs-example)
-
-##### Some basic docker commands to get you going:
+##### Basic docker commands to get you going:
   - `docker rm -f emacs` - remove `emacs` container
   - `docker restart emacs` - restart `emacs` container
   - `docker rmi -f jare/emacs` - remove `jare/emacs` image
