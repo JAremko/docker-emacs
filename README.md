@@ -11,7 +11,7 @@
 
 
 #### Why?
-  - Reap the benefit of Emacs and other GNU/Linux tools on Windows/MacOS machines
+  - Reap the benefits of Emacs and other GNU/Linux tools on Windows/MacOS machines
   - Use [docker hub](https://hub.docker.com/) to auto-build your environment and store full backups for free
   - Build once and work with the same development environment everywhere
   - Run untrusted/risky code in the tunable sandbox with CPU/network/disk quotas
@@ -27,7 +27,7 @@
  - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs25)
  - `testing` [dockerfiles/snapshot](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.snapshot)
  - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs24)
- - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) - *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb) but can be glitchy*
+ - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) - *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb uncompressed) but can be glitchy*
 
 #### How to use
 First get [docker](https://docs.docker.com/engine/installation/) for your OS.
@@ -134,7 +134,7 @@ xhost +local:`docker inspect --format='{{ .Config.Hostname }}' emacs`
 ###### Cons:
   - Lag spikes with some OSes
 
-##### Basic docker commands to get you going:
+##### Basic docker commands to get you started:
   - `docker rm -f emacs` - remove `emacs` container
   - `docker restart emacs` - restart `emacs` container
   - `docker rmi -f jare/emacs` - remove `jare/emacs` image
