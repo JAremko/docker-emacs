@@ -43,7 +43,7 @@ RUN chown root /usr/local/sbin/asEnvUser \
 
 # Emacs
 RUN apt-get update && apt-get install software-properties-common \
-    && apt-add-repository ppa:adrozdoff/emacs \
+    && apt-add-repository ppa:kelleyk/emacs \
     && apt-get update && apt-get install emacs25 \
 # Cleanup
     && apt-get purge software-properties-common \
