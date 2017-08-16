@@ -1,4 +1,5 @@
-FROM ubuntu:latest
+ARG VERSION=latest
+FROM ubuntu:$VERSION
 
 MAINTAINER JAremko <w3techplaygound@gmail.com>
 
