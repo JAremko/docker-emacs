@@ -29,7 +29,7 @@ fi
 if [ -d "${UHOME}" ]
 then
   home_owner="$(stat --format '%U' ${UHOME})"
-  if [ $(id -u ${UNAME}) -ne $(id -u ${home_owner}) ]; then
+  if ! id "${home_owner}" >/dev/null 2>&1 || [ "$(id -u ${UNAME})" -ne "$(id -u ${home_owner})" ]; then
     chown "${UID}":"${GID}" -R ${UHOME}
   fi
 else
