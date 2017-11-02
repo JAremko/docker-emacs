@@ -71,7 +71,7 @@ xhost + <your-machine-ip>
 
 ```
 docker run --name emacs\
- -e DISPLAY="unix$DISPLAY"\
+ -e DISPLAY="$DISPLAY"\
  -e UNAME="emacser"\
  -e GNAME="emacsers"\
  -e UID="1000"\
@@ -83,7 +83,7 @@ docker run --name emacs\
  Or with `-ti` via `winpty`
  ```
 winpty docker run -ti --name emacs\
- -e DISPLAY="unix$DISPLAY"\
+ -e DISPLAY="$DISPLAY"\
  -e UNAME="emacser"\
  -e GNAME="emacsers"\
  -e UID="1000"\
@@ -93,7 +93,7 @@ winpty docker run -ti --name emacs\
  jare/emacs emacs
  ```
 *[source](http://manomarks.github.io/2015/12/03/docker-gui-windows.html)*
-*You can use [@ninrod 's vagrant setup](https://github.com/JAremko/docker-emacs/issues/2#issuecomment-260047233)*
+*You can use [@ninrod 's setup](https://www.reddit.com/r/emacs/comments/7a63r4/emacs_in_win10linuxdockerxserver_combo/)*
 
 ##### GNU/Linux
 *`UID` and preferably `UNAME` should match the host's user id.
