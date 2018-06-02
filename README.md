@@ -18,15 +18,15 @@
   - Try new tools, experiment and roll back changes when something goes wrong
   - Share your setup with others or extend someone else’s development environment
   - Run multiple Emacs instances on the same machine isolated
-  - An easy way to swap Emacs version (`emacs25`,`emacs24`,`emacs-snapshot`) for debugging
+  - An easy way to swap Emacs version (`emacs26`,`emacs25`,`emacs-snapshot`) for debugging
   - [Pause](https://docs.docker.com/engine/reference/commandline/pause) container to free resources temporarily
   - [Checkpoint & Restore](https://github.com/docker/docker/blob/1.13.x/experimental/checkpoint-restore.md) - maybe the fastest way to start a “heavy” environment
   - Friendly for networks with low upload speed/quotas
 
 #### Tags:
- - `latest`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs25)
+ - `latest`  [dockerfiles/emacs26](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs26)
+ - `emacs25`  [dockerfiles/emacs25](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs25)
  - `testing` [dockerfiles/snapshot](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.snapshot)
- - `emacs24` [dockerfiles/emacs24](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.emacs24)
  - `alpine` [dockerfiles/alpine](https://github.com/JAremko/docker-emacs/blob/master/Dockerfile.alpine) - *[Emacs build](https://pkgs.alpinelinux.org/package/edge/community/x86_64/emacs) on [Alpine Linux](https://www.alpinelinux.org/) small (around 300mb uncompressed) but can be glitchy*
 
 #### How to use
