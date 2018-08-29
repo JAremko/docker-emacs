@@ -11,30 +11,36 @@
 ## NOTE: ^^^^ Those are default values only in docker-emacs
 ## NOTE: The user will have "no password" sudo privilege
 
+## Create user if it doesn't exists
 if ! id "${UNAME}" >/dev/null 2>&1; then
-  echo "${UNAME}:x:${UID}:${GID}:${UNAME},,,:${UHOME}:${SHELL}" >> /etc/passwd
-  echo "${UNAME}::17032:0:99999:7:::" >> /etc/shadow
+	## Prepend the user to /etc/passwd to ensure that it will
+	## override already existing users with the same IDs
+	echo -e "${UNAME}:x:${UID}:${GID}:${UNAME},,,:${UHOME}:${SHELL}\n$(cat input)" > /etc/passwd
+	echo "${UNAME}::17032:0:99999:7:::" >> /etc/shadow
 fi
 
+## Make sure that user is sudoer
 if [ ! -f "/etc/sudoers.d/${UNAME}" ]; then
-  echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/${UNAME}"
-  chmod 0440 "/etc/sudoers.d/${UNAME}"
+	echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/${UNAME}"
+	chmod 0440 "/etc/sudoers.d/${UNAME}"
 fi
 
+## Create user's group if it doesn't exists
 egrep -i "^${GNAME}" /etc/group;
 if [ $? -ne 0 ]; then
-  echo "${GNAME}:x:${GID}:${UNAME}" >> /etc/group
+	echo "${GNAME}:x:${GID}:${UNAME}" >> /etc/group
 fi
 
+## Make sure that the user owns home directory
 if [ -d "${UHOME}" ]
 then
-  home_owner="$(stat --format '%U' ${UHOME})"
-  if ! id "${home_owner}" >/dev/null 2>&1 || [ "$(id -u ${UNAME})" -ne "$(id -u ${home_owner})" ]; then
-    chown "${UID}":"${GID}" -R ${UHOME}
-  fi
+	home_owner="$(stat --format '%U' ${UHOME})"
+	if ! id "${home_owner}" >/dev/null 2>&1 || [ "$(id -u ${UNAME})" -ne "$(id -u ${home_owner})" ]; then
+		chown "${UID}":"${GID}" -R ${UHOME}
+	fi
 else
-  mkdir -p "${UHOME}"
-  chown "${UID}":"${GID}" "${UHOME}"
+	mkdir -p "${UHOME}"
+	chown "${UID}":"${GID}" "${UHOME}"
 fi
 
 mkdir -p "${WORKSPACE}"
