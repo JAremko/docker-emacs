@@ -15,7 +15,7 @@
 if ! id "${UNAME}" >/dev/null 2>&1; then
 	## Prepend the user to /etc/passwd to ensure that it will
 	## override already existing users with the same IDs
-	echo -e "${UNAME}:x:${UID}:${GID}:${UNAME},,,:${UHOME}:${SHELL}\n$(cat input)" > /etc/passwd
+	echo -e "${UNAME}:x:${UID}:${GID}:${UNAME},,,:${UHOME}:${SHELL}\n$(cat /etc/passwd)" > /etc/passwd
 	echo "${UNAME}::17032:0:99999:7:::" >> /etc/shadow
 fi
 
