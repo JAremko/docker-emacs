@@ -26,9 +26,11 @@ if [ ! -f "/etc/sudoers.d/${UNAME}" ]; then
 fi
 
 ## Create user's group if it doesn't exists
-egrep -i "^${GNAME}" /etc/group;
+u_group=$(egrep -i "^${GNAME}" /etc/group)
 if [ $? -ne 0 ]; then
 	echo "${GNAME}:x:${GID}:${UNAME}" >> /etc/group
+elif [[ ${u_group} != *"${UNAME}"* ]]; then
+	sed -i -e "s/${u_group}/${u_group},${UNAME}/g" /etc/group
 fi
 
 ## Make sure that the user owns home directory
