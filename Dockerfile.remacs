@@ -47,7 +47,7 @@ RUN apt-get update && apt-get install \
     curl \
     && curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && /root/.cargo/bin/rustup install nightly \
-    && git clone https://github.com/Wilfred/remacs.git /tmp/remacs-bd \
+    && git clone https://github.com/remacs/remacs.git /tmp/remacs-bd \
     && cd /tmp/remacs-bd \
     && export PATH=$PATH:/root/.cargo/bin \
     && rustup override set nightly \
