@@ -43,9 +43,14 @@ RUN chown root /usr/local/sbin/asEnvUser \
 # ^^^^^^^ Those layers are shared ^^^^^^^
 
 # Emacs
-RUN apt-get update && apt-get install emacs25 \
+RUN apt-get update && apt-get install software-properties-common \
+  && apt-add-repository ppa:kelleyk/emacs \
+  && apt-get update && apt-get install emacs25 \
 # Cleanup
-    && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
+  && apt-get purge software-properties-common \
+  && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
+
+COPY package-keyring.gpg /usr/share/emacs/25.3/etc/package-keyring.gpg
 
 ENV UNAME="emacser" \
     GNAME="emacs" \
