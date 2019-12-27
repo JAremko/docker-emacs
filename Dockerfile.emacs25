@@ -50,8 +50,6 @@ RUN apt-get update && apt-get install software-properties-common \
   && apt-get purge software-properties-common \
   && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
-COPY package-keyring.gpg /usr/share/emacs/25.3/etc/package-keyring.gpg
-
 ENV UNAME="emacser" \
     GNAME="emacs" \
     UHOME="/home/emacs" \
