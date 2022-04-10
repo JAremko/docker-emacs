@@ -1,64 +1,391 @@
+FROM ubuntu:18.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@JAremko
+JAremko /
+docker-emacs
+Public
+
+Code
+Issues 3
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+
+    Settings
+
+docker-emacs/
+in
+master
+
+1
+
 ARG VERSION=latest
+
+2
+
 FROM ubuntu:$VERSION
+
+3
+
+​
+
+4
 
 MAINTAINER JAremko <w3techplaygound@gmail.com>
 
+5
+
+​
+
+6
+
 # Fix "Couldn't register with accessibility bus" error message
+
+7
+
 ENV NO_AT_BRIDGE=1
+
+8
+
+​
+
+9
 
 ENV DEBIAN_FRONTEND noninteractive
 
+10
+
+​
+
+11
+
 # basic stuff
+
+12
+
 RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf \
+
+13
+
     && apt-get update && apt-get install \
+
+14
+
     bash \
+
+15
+
     build-essential \
+
+16
+
     dbus-x11 \
+
+17
+
     fontconfig \
+
+18
+
     git \
+
+19
+
     gzip \
+
+20
+
     language-pack-en-base \
+
+21
+
     libgl1-mesa-glx \
+
+22
+
     make \
+
+23
+
     sudo \
+
+24
+
     tar \
+
+25
+
     unzip \
+
+26
+
 # su-exec
+
+27
+
     && git clone https://github.com/ncopa/su-exec.git /tmp/su-exec \
+
+28
+
     && cd /tmp/su-exec \
+
+29
+
     && make \
+
+30
+
     && chmod 770 su-exec \
+
+31
+
     && mv ./su-exec /usr/local/sbin/ \
+
+32
+
 # Cleanup
+
+33
+
     && apt-get purge build-essential \
+
+34
+
     && apt-get autoremove \
+
+35
+
     && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
+
+36
+
+​
+
+37
 
 COPY asEnvUser /usr/local/sbin/
 
+38
+
+​
+
+39
+
 # Only for sudoers
+
+40
+
 RUN chown root /usr/local/sbin/asEnvUser \
+
+41
+
     && chmod 700  /usr/local/sbin/asEnvUser
+
+42
+
+​
+
+43
 
 # ^^^^^^^ Those layers are shared ^^^^^^^
 
+44
+
+​
+
+45
+
 # Emacs
+
+46
+
 RUN apt-get update && apt-get install software-properties-common \
-    && apt-add-repository ppa:kelleyk/emacs \
-    && apt-get update && apt-get install emacs26 \
-# Cleanup
-    && apt-get purge software-properties-common \
-    && rm -rf /tmp/* /var/lib/apt/lists/* /root/.cache/*
 
-ENV UNAME="emacser" \
-    GNAME="emacs" \
-    UHOME="/home/emacs" \
-    UID="1000" \
-    GID="1000" \
-    WORKSPACE="/mnt/workspace" \
-    SHELL="/bin/bash"
+@JAremko
+Commit changes
+Commit summary
+Optional extended description
+Commit directly to the master branch.
+Create a new branch for this commit and start a pull request. Learn more about pull requests.
 
-WORKDIR "${WORKSPACE}"
+    © 2022 GitHub, Inc.
 
-ENTRYPOINT ["asEnvUser"]
-CMD ["bash", "-c", "emacs; /bin/bash"]
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+
+		bison \
+		build-essential \
+		clang \
+		cmake \
+		flex \
+		git \
+		gnulib \
+		gperf \
+		inotify-tools \
+		libatspi2.0-dev \
+		libbluetooth-dev \
+		libclang-dev \
+		libcups2-dev \
+		libdrm-dev \
+		libegl1-mesa-dev \
+		libfontconfig1-dev \
+		libfreetype6-dev \
+		libgl-dev \
+		libgstreamer1.0-dev \
+		libhunspell-dev \
+		libmirclient-dev \
+		libmysqlclient-dev \
+		libnss3-dev \
+		libpulse-dev \
+		libsctp-dev \
+		libssl-dev \
+		libts-dev \
+		libwayland-dev \
+		libwayland-egl-backend-dev \
+		libwebp-dev \
+		libx11-dev \
+		libx11-xcb-dev \
+		libxcb-ewmh-dev \
+		libxcb-glx0-dev \
+		libxcb-icccm4-dev \
+		libxcb-image0-dev \
+		libxcb-keysyms1-dev \
+		libxcb-randr0-dev \
+		libxcb-render-util0-dev \
+		libxcb-shape0-dev \
+		libxcb-shm0-dev \
+		libxcb-sync-dev \
+		libxcb-util-dev \
+		libxcb-xfixes0-dev \
+		libxcb-xinerama0-dev \
+		libxcb-xkb-dev \
+		libxcb1-dev \
+		libxcomposite-dev \
+		libxcursor-dev \ 
+		libxdamage-dev \
+		libxext-dev \
+		libxfixes-dev \
+		libxi-dev \
+		libxkbcommon-dev \
+		libxkbcommon-x11-dev \
+		libxkbfile-dev \
+		libxrandr-dev \
+		libxrender-dev \
+		libxshmfence-dev \
+		libxshmfence1 \
+		ninja-build \
+		nodejs \
+		qt5-default \
+		qtwayland5 \
+		software-properties-common \    
+		wget
+
+WORKDIR /tmp
+
+#####################################
+# install gcc 11
+RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
+    apt-get install gcc-11
+
+# make gcc 11 default
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110
+#####################################
+
+## get cmake SDK
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.0/cmake-3.23.0.tar.gz && \
+    tar xf cmake-3.23.0.tar.gz
+	
+## configure cmake
+RUN cd cmake-3.23.0 && ./configure
+
+## build cmake
+RUN cd cmake-3.23.0 &&  make
+
+## install cmake
+RUN cd cmake-3.23.0 &&  make install
+
+#####################################
+## get vulkan
+RUN git clone https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers.git && \
+    cp -r Vulkan-LoaderAndValidationLayers/include/vulkan /usr/include/ && \
+    cd Vulkan-LoaderAndValidationLayers && \
+    ./update_external_sources.sh
+
+# build and install vulkan
+RUN cd Vulkan-LoaderAndValidationLayers && \
+    mkdir build && \
+    cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Debug .. && \
+    make && \
+    make install
+
+ENV VULKAN_HEADERS_INSTALL_DIR=/usr/local/vulkan-sdk/Vulkan-Headers/build/install
+
+#####################################
+## get llvm install script
+RUN wget https://apt.llvm.org/llvm.sh && chmod +x llvm.sh
+
+## install llvm
+RUN ./llvm.sh 14 all
+	
+# make llvm clang default
+RUN update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-14/bin/clang 140
+
+# make llvm clang++ default
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-14/bin/clang++ 140
+
+ENV CC=/usr/bin/clang \
+    CXX=/usr/bin/clang++ \
+    CXX_STANDARD=c++17 \
+    CPLUS_INCLUDE_PATH=/usr/lib/llvm-14/include/c++/v1 \
+    LIBRARY_PATH=/usr/lib/llvm-14/lib \
+    LLVM_LIB_SEARCH_PATH=/usr/lib/llvm-14/lib \
+    CXXFLAGS="-std=c++17 -stdlib=libc++ -DCMAKE_CXX_STANDARD=17" \
+    PATH=$PATH:/usr/lib/llvm-14/bin
+
+#####################################
+## install vulkan hpp
+## RUN git clone --depth=1 --recurse-submodules https://github.com/KhronosGroup/Vulkan-Hpp.git
+## TODO
+
+#####################################
+## get qt
+RUN wget https://download.qt.io/official_releases/qt/6.2/6.2.4/single/qt-everywhere-src-6.2.4.tar.xz && \
+    tar xf qt-everywhere-src-6.2.4.tar.xz
+
+## configure qt
+RUN cd /tmp/qt-everywhere-src-6.2.4 && \
+    ./configure -prefix /usr/local/Qt6 \
+                -skip qtwebengine \
+                -c++std c++17 \
+                -inotify \
+                -feature-vulkan \
+                -sctp \
+                -eventfd
+
+## build qt
+RUN cd /tmp/qt-everywhere-src-6.2.4 && cmake --build . --parallel
+
+#####################################
+## configure qt modules
+RUN cd /tmp/qt-everywhere-src-6.2.4 && ./usr/local/Qt6/bin/qt-configure-module
